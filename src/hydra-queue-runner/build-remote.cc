@@ -48,9 +48,11 @@ static std::unique_ptr<SSHMaster::Connection> openConnection(
 {
     Strings command = {"nix-store", "--serve", "--write"};
     if (machine->isLocalhost()) {
+        printMsg(lvlInfo, "open connection isLocalhost");
         command.push_back("--builders");
         command.push_back("");
     } else {
+        printMsg(lvlInfo, "open connection isNotLocalhost");
         command.splice(command.end(), extraStoreArgs(machine->sshName));
     }
 
