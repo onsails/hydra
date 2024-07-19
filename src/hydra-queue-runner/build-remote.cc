@@ -204,10 +204,12 @@ static BasicDerivation sendInputs(
 
         /* Copy the input closure. */
         if (conn.machine->isLocalhost()) {
+            printMsg(lvlInfo, "isLocalhost");
             StorePathSet closure;
             destStore.computeFSClosure(basicDrv.inputSrcs, closure);
             copyPaths(destStore, localStore, closure, NoRepair, NoCheckSigs, NoSubstitute);
         } else {
+            printMsg(lvlInfo, "isNotLocalhost");
             copyClosureTo(conn, destStore, basicDrv.inputSrcs, Substitute);
         }
 
