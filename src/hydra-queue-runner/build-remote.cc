@@ -56,6 +56,7 @@ static std::unique_ptr<SSHMaster::Connection> openConnection(
         command.splice(command.end(), extraStoreArgs(machine->sshName));
     }
 
+    printMsg(lvlInfo, "command: %s", command);
     auto ret = master.startCommand(std::move(command), {
         "-a", "-oBatchMode=yes", "-oConnectTimeout=60", "-oTCPKeepAlive=yes"
     });
